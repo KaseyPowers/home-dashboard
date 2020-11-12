@@ -1,27 +1,13 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import {
-  unstable_createMuiStrictModeTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-let theme = unstable_createMuiStrictModeTheme({
-  palette: {
-    type: "dark",
-  },
-});
-
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  //     <App />
+  // </React.StrictMode>,
+  <App />,
   document.getElementById("root")
 );
 

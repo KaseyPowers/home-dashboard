@@ -1,30 +1,27 @@
-import Grid from "@material-ui/core/Grid";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 
-import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import {
+  // unstable_createMuiStrictModeTheme,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 
-import { Placeholder } from "./widgets";
+import Dashboard from "./Dashboard";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    margin: theme.spacing(2),
+// const theme = unstable_createMuiStrictModeTheme({
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
   },
-}));
+});
 
-const App = () => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Placeholder xs={4} />
-        <Placeholder xs={8} />
-        <Placeholder xs={8} />
-        <Placeholder xs={4} />
-        <Placeholder xs={12} />
-      </Grid>
-    </div>
-  );
-};
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Dashboard />
+  </ThemeProvider>
+);
 
 export default App;
