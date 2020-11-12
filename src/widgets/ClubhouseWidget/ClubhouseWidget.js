@@ -1,6 +1,8 @@
 // Sign up for clubhouse api token https://github.com/clubhouse/api-cookbook/blob/main/set-up-instructions.md#setting-your-environment-variable
 
 import WidgetCard from "../WidgetCard";
+import { CardContent, Typography, Link } from "@material-ui/core";
+
 
 const ClubhouseWidget = (props) => {
 
@@ -38,25 +40,33 @@ const ClubhouseWidget = (props) => {
     })
     return storyObj;
   });
-
-  // const clubhouseStories = () => {
-  //   stories && Object.keys(stories).map(key => (
-  //     <div key={key}>
-  //       <a href={stories[key].url}>{stories[key].name}</a>
-  //     </div>
-  //   ))
-  // }
   
 
   return(
     <WidgetCard {...props}>
+      <CardContent>
+        <Typography component="h3" varient="h3">
+          Clubhouse Stories Associated with you:
+        </Typography>
       { stories && Object.keys(stories).map(key => (
-        <div key={key}>
-          <a href={stories[key].url}>{stories[key].name}</a>
-        </div>
+        <Typography component="h4" varient="h4" key={key}>
+          <Link href={stories[key].url}>{stories[key].name}</Link>
+        </Typography>
       ))}
+
+      </CardContent>
     </WidgetCard>
   )
   };
+
+ClubhouseWidget.key = "Clubhouse";
+ClubhouseWidget.layout = {
+  x: 0,
+  y: 0,
+  w: 3,
+  h: 2,
+  minW: 2,
+  maxW: 4,
+};
 
 export default ClubhouseWidget;
