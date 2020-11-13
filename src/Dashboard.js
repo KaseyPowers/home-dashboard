@@ -14,7 +14,14 @@ const sampleLayouts = {
   b: { x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
   c: { x: 4, y: 0, w: 1, h: 2 },
 };
-const Widgets = [DateTimeWidget, ClubhouseWidget, Placeholder, "a", "b", "c"];
+const Widgets = [
+  DateTimeWidget,
+  ClubhouseWidget,
+  Placeholder,
+  "a",
+  "b",
+  "c",
+].filter(Boolean);
 
 function getLayoutForBreakpoint(widget, breakpoint) {
   if (typeof widget === "string") {
