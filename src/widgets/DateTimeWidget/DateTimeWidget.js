@@ -1,18 +1,41 @@
+import { useEffect, useState, useMemo } from "react";
 import { CardContent, Typography } from "@material-ui/core";
 
 import WidgetCard from "../WidgetCard";
 
+import DisplayDate from "./DisplayDate";
+
+function getTimeString(date) {
+  return Intl.DateTimeFormat("en", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  }).format(date);
+}
+
 const DateTimeWidget = (props) => {
+  const [currentTime, setCurrentTime] = useState();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(() => new Date());
+    }, 1000);
+
+    return () => clearImmediate(intervalId);
+  }, []);
+
+  const timeString = useMemo(() => currentTime && getTimeString(currentTime), [
+    currentTime,
+  ]);
+
   return (
-    <WidgetCard {...props}>
+    <WidgetCard textAlign="left" {...props}>
       <CardContent>
-        <Typography component="h3" varient="h3">
-          Date
+        <Typography variant="h4">
+          <DisplayDate date={currentTime} />
         </Typography>
-        <Typography component="h4" varient="h4">
-          Time
-        </Typography>
-        <Typography varient="subtitle1">Other Timezones...</Typography>
+        <Typography variant="h5">{timeString}</Typography>
+        <Typography variant="subtitle1">Other Timezones...</Typography>
       </CardContent>
     </WidgetCard>
   );
@@ -23,7 +46,7 @@ DateTimeWidget.layout = {
   x: 0,
   y: 0,
   w: 3,
-  h: 2,
+  h: 1,
   minW: 2,
   maxW: 4,
 };

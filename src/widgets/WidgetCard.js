@@ -7,12 +7,12 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     // padding: (props) => (props.padding ? theme.spacing(2) : undefined),
     color: theme.palette.text.secondary,
-    textAlign: "center",
+    textAlign: (props) => (props.textAlign ? props.textAlign : undefined),
   },
 }));
 
-const WidgetCard = ({ children }) => {
-  const classes = useStyles();
+const WidgetCard = ({ children, textAlign = "center" }) => {
+  const classes = useStyles({ textAlign });
 
   return <Card className={classes.container}>{children}</Card>;
 };
