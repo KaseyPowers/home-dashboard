@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { CardContent, Typography } from "@material-ui/core";
 
-import WidgetCard from "../WidgetCard";
+import { WidgetCard } from "../../components";
 
 import DisplayDate from "./DisplayDate";
 

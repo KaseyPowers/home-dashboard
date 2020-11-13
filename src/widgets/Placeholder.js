@@ -1,4 +1,4 @@
-import WidgetCard from "./WidgetCard";
+import { WidgetCard } from "../components";
 
 const Placeholder = (props) => (
   <WidgetCard {...props}>Example Widget</WidgetCard>

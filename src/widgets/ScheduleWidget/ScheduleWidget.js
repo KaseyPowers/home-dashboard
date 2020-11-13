@@ -8,7 +8,7 @@ import {
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
-import WidgetCard from "../WidgetCard";
+import { WidgetCard } from "../../components";
 
 import colCounts from "../../colCounts";
 
@@ -33,7 +33,6 @@ const ScheduleWidget = () => {
         <ViewState currentDate={currentDate} />
         <DayView startDayHour={9} endDayHour={18} />
         <WeekView startDayHour={10} endDayHour={19} />
-
         <Toolbar />
         <ViewSwitcher />
         <Appointments />
@@ -50,7 +49,7 @@ ScheduleWidget.layout = {
   w: 4,
   h: 4,
   minW: 2,
-  maxW: 4,
+  maxW: 8,
 };
 
 ScheduleWidget.layouts = Object.keys(colCounts).reduce((output, breakpoint) => {

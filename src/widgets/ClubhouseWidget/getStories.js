@@ -1,3 +1,4 @@
+// Sign up for clubhouse api token https://github.com/clubhouse/api-cookbook/blob/main/set-up-instructions.md#setting-your-environment-variable
 const getUser = async () => {
   const response = await fetch("https://api.clubhouse.io/api/v3/member", {
     method: "GET",
