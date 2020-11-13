@@ -6,7 +6,7 @@ const Placeholder = (props) => (
 
 Placeholder.key = "placeholder";
 Placeholder.layout = {
-  x: 2,
+  x: 4,
   y: 1,
   w: 4,
   h: 2,

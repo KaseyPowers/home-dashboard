@@ -39,12 +39,12 @@ const ClubhouseWidget = (props) => {
 
 ClubhouseWidget.key = "Clubhouse";
 ClubhouseWidget.layout = {
-  x: 0,
+  x: 3,
   y: 0,
-  w: 3,
+  w: 5,
   h: 2,
   minW: 2,
-  maxW: 4,
+  maxW: 8,
 };
 
 export default ClubhouseWidget;
