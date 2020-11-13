@@ -9,6 +9,7 @@ import {
   DateTimeWidget,
   ClubhouseWidget,
   ScheduleWidget,
+  HelpfulLinksWidget,
 } from "./widgets";
 
 import colCounts from "./colCounts";
@@ -16,6 +17,7 @@ import colCounts from "./colCounts";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Widgets = [
+  HelpfulLinksWidget,
   DateTimeWidget,
   ClubhouseWidget,
   Placeholder,

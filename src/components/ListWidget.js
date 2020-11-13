@@ -1,6 +1,13 @@
 import { useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, List, ListItem, Divider } from "@material-ui/core";
+import {
+  Typography,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from "@material-ui/core";
 // Sign up for clubhouse api token https://github.com/clubhouse/api-cookbook/blob/main/set-up-instructions.md#setting-your-environment-variable
 
 import WidgetCard from "./WidgetCard";
@@ -36,10 +43,14 @@ const ListWidget = ({ title, list = [] }) => {
     const listContents =
       (Array.isArray(list) &&
         list
-          .map(({ key, href, url, text }) => {
-            if (!key || !text) {
+          .map(({ key, id, href, url, text, body, icon }) => {
+            const useKey = key || id;
+            const useText = text || body;
+
+            if (!useKey || !useText) {
               return false;
             }
+
             const itemProps = {};
             const useHref = href || url;
             if (useHref) {
@@ -47,11 +58,13 @@ const ListWidget = ({ title, list = [] }) => {
                 button: true,
                 component: "a",
                 href: useHref,
+                target: "_blank",
               });
             }
             return (
-              <ListItem key={key} {...itemProps}>
-                {text}
+              <ListItem key={useKey} {...itemProps}>
+                {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                <ListItemText>{useText}</ListItemText>
               </ListItem>
             );
           })
@@ -68,9 +81,7 @@ const ListWidget = ({ title, list = [] }) => {
       <div className={classes.content}>
         {useTitle && (
           <div className={classes.title}>
-            <Typography component="h3" varient="h3">
-              {useTitle}
-            </Typography>
+            <Typography variant="h5">{useTitle}</Typography>
           </div>
         )}
         {useTitle && useList && <Divider />}
