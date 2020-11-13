@@ -5,13 +5,25 @@ import WidgetCard from "../WidgetCard";
 
 import DisplayDate from "./DisplayDate";
 
-function getTimeString(date) {
-  return Intl.DateTimeFormat("en", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  }).format(date);
+const baseOptions = {
+  hour: "numeric",
+  minute: "numeric",
+  hour12: true,
+  timeZoneName: "short",
+};
+function getTimeString(date, timeZone) {
+  const options = { ...baseOptions };
+  if (timeZone) {
+    options.timeZone = timeZone;
+  }
+
+  return Intl.DateTimeFormat(navigator.language, options).format(date);
 }
+
+// const useTimeZones = [
+//     "America/Chicago",
+//     "America/Indiana/Indianapolis"
+// ];
 
 const DateTimeWidget = (props) => {
   const [currentTime, setCurrentTime] = useState();
@@ -24,9 +36,15 @@ const DateTimeWidget = (props) => {
     return () => clearImmediate(intervalId);
   }, []);
 
-  const timeString = useMemo(() => currentTime && getTimeString(currentTime), [
-    currentTime,
-  ]);
+  const timeStrings = useMemo(() => {
+    const output = [];
+    if (currentTime) {
+      // show current time
+      output.push(getTimeString(currentTime));
+      // TODO: useTimeZones to get other ones
+    }
+    return output;
+  }, [currentTime]);
 
   return (
     <WidgetCard textAlign="left" {...props}>
@@ -34,8 +52,14 @@ const DateTimeWidget = (props) => {
         <Typography variant="h4">
           <DisplayDate date={currentTime} />
         </Typography>
-        <Typography variant="h5">{timeString}</Typography>
-        <Typography variant="subtitle1">Other Timezones...</Typography>
+        {timeStrings.map((timeString, index) => (
+          <Typography
+            variant={index === 0 ? "h5" : "subtitle1"}
+            key={timeString}
+          >
+            {timeString}
+          </Typography>
+        ))}
       </CardContent>
     </WidgetCard>
   );

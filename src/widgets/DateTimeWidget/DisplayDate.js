@@ -1,11 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { useMemo } from "react";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   datePart: {
     display: "inline-block",
   },
-}));
+});
 
 const DisplayDate = ({ date }) => {
   const classes = useStyles();
