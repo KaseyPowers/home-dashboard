@@ -4,30 +4,25 @@ import { useTheme } from "@material-ui/core/styles";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import { Placeholder, DateTimeWidget, ClubhouseWidget } from "./widgets";
-import WidgetCard from "./widgets/WidgetCard";
+import {
+  Placeholder,
+  DateTimeWidget,
+  ClubhouseWidget,
+  ScheduleWidget,
+} from "./widgets";
+
+import colCounts from "./colCounts";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const sampleLayouts = {
-  a: { x: 0, y: 0, w: 1, h: 2, static: true },
-  b: { x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-  c: { x: 4, y: 0, w: 1, h: 2 },
-};
 const Widgets = [
   DateTimeWidget,
   ClubhouseWidget,
   Placeholder,
-  "a",
-  "b",
-  "c",
+  ScheduleWidget,
 ].filter(Boolean);
 
 function getLayoutForBreakpoint(widget, breakpoint) {
-  if (typeof widget === "string") {
-    return sampleLayouts[widget];
-  }
-
   const { key, layout = {}, layouts = {} } = widget;
   const output = {
     i: key,
@@ -58,20 +53,11 @@ const App = () => {
 
   const children = useMemo(
     () =>
-      Widgets.map((widget) => {
-        let key;
-        let body;
-        if (typeof widget === "string") {
-          key = widget;
-          body = <WidgetCard>{widget}</WidgetCard>;
-        } else {
-          key = widget.key;
-          const Widget = widget;
-          body = <Widget />;
-        }
-
-        return <div key={key}>{body}</div>;
-      }),
+      Widgets.map((Widget) => (
+        <div key={Widget.key}>
+          <Widget />
+        </div>
+      )),
     []
   );
 
@@ -80,7 +66,7 @@ const App = () => {
       className="layout"
       layouts={layouts}
       breakpoints={breakpoints}
-      cols={{ xl: 14, lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+      cols={colCounts}
     >
       {children}
     </ResponsiveGridLayout>
