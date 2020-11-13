@@ -9,6 +9,7 @@ import {
   DateTimeWidget,
   ClubhouseWidget,
   ScheduleWidget,
+  GithubWidget
 } from "./widgets";
 
 import colCounts from "./colCounts";
@@ -20,6 +21,7 @@ const Widgets = [
   ClubhouseWidget,
   Placeholder,
   ScheduleWidget,
+  GithubWidget
 ].filter(Boolean);
 
 function getLayoutForBreakpoint(widget, breakpoint) {
